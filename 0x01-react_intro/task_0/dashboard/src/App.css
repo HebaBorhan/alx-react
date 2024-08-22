@@ -15,15 +15,15 @@
   align-items: center;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: #c44b52;
-  border-bottom: 5px solid #c44b52;
+  color: rgb(231, 79, 79);
+  border-bottom: 5px solid rgb(231, 79, 79);
 }
 
 .App-body {
   padding-top: 40px;
   font-size: 20px;
   min-height: 65vh;
-  border-bottom: 5px solid #c44b52;
+  border-bottom: 5px solid rgb(231, 79, 79);
 }
 
 .App-footer {
