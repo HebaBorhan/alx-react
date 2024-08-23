@@ -4,11 +4,11 @@ import _ from 'lodash';
 let count = 0;
 
 function updateCounter() {
-    count +=1;
+    count += 1;
     $('#count').text(`${count} clicks on the button`);
 }
 
-const debouncedUpdateCounter = _.debounce(updateCounter, 300);
+const debouncedUpdateCounter = _.debounce(updateCounter, 500);
 
 $('body').append('<p>Holberton Dashboard</p>');
 $('body').append('<p>Dashboard data for the students</p>');
