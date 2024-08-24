@@ -23,7 +23,10 @@ export function Notifications() {
           background: 'transparent',
         }}
       >
-        <img src={closeIcon} alt="Close Icon"></img>
+        <img 
+        src={closeIcon} 
+        alt="Close Icon"
+        style={{ width: '25px', height: '20px' }}></img>
       </button>
       
     </div>
