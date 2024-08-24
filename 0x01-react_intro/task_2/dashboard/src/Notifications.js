@@ -4,15 +4,17 @@ import closeIcon from './close-icon.png';
 import { getLatestNotification } from './utils';
 
 export function Notifications() {
-  const handleClick = () => {
-    console.log('Close button has been clicked');
-  };
-
   return (
     <div className="Notifications">
+      <p>Here is the list of notifications</p>
+      <ul>
+        <li data="default">New course available</li>
+        <li data="urgent">New resume available</li>
+        <li data="urgent" dangerouslySetInnerHTML={{ __html: getLatestNotification() }} />
+      </ul>
+
       <button
-        onClick={handleClick}
-        aria-label="Close"
+        aria-label='close' onClick={() => { console.log("Close button has been clicked") }}
         style={{
           position: 'absolute',
           top: '10px',
@@ -21,14 +23,9 @@ export function Notifications() {
           background: 'transparent',
         }}
       >
-        <img src={closeIcon} alt="Close Icon" />
+        <img src={closeIcon} alt="Close Icon"></img>
       </button>
-      <p>Here is the list of notifications</p>
-      <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li dangerouslySetInnerHTML={{ __html: getLatestNotification() }} />
-      </ul>
+      
     </div>
   );
 }
