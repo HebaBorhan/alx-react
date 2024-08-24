@@ -1,5 +1,5 @@
 .Notifications {
-    border: 1px solid #ccc;
+    border: 1px dashed red;
     padding: 10px;
     margin: 20px;
     position: relative;
@@ -10,11 +10,11 @@
     padding: 0;
   }
   
-  li[data-priority="default"] {
+  li[data="default"] {
     color: blue;
   }
   
-  li[data-priority="urgent"] {
+  li[data="urgent"] {
     color: red;
   }
   
