@@ -8,9 +8,13 @@ export function Notifications() {
     <div className="Notifications">
       <p>Here is the list of notifications</p>
       <ul>
-        <li data="default">New course available</li>
-        <li data="urgent">New resume available</li>
-        <li data="urgent" dangerouslySetInnerHTML={{ __html: getLatestNotification() }} />
+        <li data="default">
+          <span className="bullet">&#8226;</span> New course available
+        </li>
+        <li data="urgent">
+          <span className="bullet">&#8226;</span> New resume available
+        </li>
+        <li data="urgent" dangerouslySetInnerHTML={{ __html: `<span class='bullet'>&#8226;</span> ${getLatestNotification()}` }} />
       </ul>
 
       <button
