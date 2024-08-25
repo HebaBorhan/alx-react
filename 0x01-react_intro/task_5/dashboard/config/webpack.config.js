@@ -10,8 +10,9 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    static: path.resolve(__dirname, '../dist'), // Use static instead of contentBase
     hot: true,
+    port: 3000, // Optional: Specify a port if needed
   },
   module: {
     rules: [
