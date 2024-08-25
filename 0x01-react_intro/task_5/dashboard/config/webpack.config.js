@@ -41,6 +41,13 @@ module.exports = {
               publicPath: 'images',
             },
           },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              disable: true,
+            },
+          },
         ],
       },
     ],
