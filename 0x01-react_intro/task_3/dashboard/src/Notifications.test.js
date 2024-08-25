@@ -1,19 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Notifications } from './Notifications';
+import { shallow } from 'enzyme';
+import Notifications from './Notifications';
 
 test('Notifications renders without crashing', () => {
-  render(<Notifications />);
+  shallow(<Notifications />);
 });
 
 test('Notifications renders three list items', () => {
-  render(<Notifications />);
-  const listItems = screen.getAllByRole('listitem');
-  expect(listItems).toHaveLength(3);
+  const wrapper = shallow(<Notifications />);
+  expect(wrapper.find('li')).toHaveLength(3);
 });
 
-test('Notifications renders the text "Here is the list of notifications"', () => {
-  render(<Notifications />);
-  const notificationText = screen.getByText(/Here is the list of notifications/i);
-  expect(notificationText).toBeInTheDocument();
+test('Notifications renders the text Here is the list of notifications', () => {
+  const wrapper = shallow(<Notifications />);
+  expect(wrapper.find('p').text()).toBe('Here is the list of notifications');
 });
