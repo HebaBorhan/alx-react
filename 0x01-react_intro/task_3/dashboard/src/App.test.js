@@ -1,25 +1,22 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import App from './App';
 
 test('App renders without crashing', () => {
-  render(<App />);
+  shallow(<App />);
 });
 
 test('App renders a div with the class App-header', () => {
-  render(<App />);
-  const headerDiv = screen.getByRole('banner');
-  expect(headerDiv).toHaveClass('App-header');
+  const wrapper = shallow(<App />);
+  expect(wrapper.find('.App-header').exists()).toBe(true);
 });
 
 test('App renders a div with the class App-body', () => {
-  render(<App />);
-  const bodyDiv = screen.getByText(/Login to access the full dashboard/i).closest('div');
-  expect(bodyDiv).toHaveClass('App-body');
+  const wrapper = shallow(<App />);
+  expect(wrapper.find('.App-body').exists()).toBe(true);
 });
 
 test('App renders a div with the class App-footer', () => {
-  render(<App />);
-  const footerDiv = screen.getByText(/Copyright/i).closest('div');
-  expect(footerDiv).toHaveClass('App-footer');
+  const wrapper = shallow(<App />);
+  expect(wrapper.find('.App-footer').exists()).toBe(true);
 });
