@@ -1,0 +1,24 @@
+.Notifications {
+    border: 1px dashed rgb(231, 79, 79);
+    padding: 10px;
+    margin: 20px;
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li[data="default"] {
+    color: blue;
+    padding-left: 20px;
+  }
+  
+  li[data="urgent"] {
+    color: red;
+    padding-left: 20px; 
+  }
+  
