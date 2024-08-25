@@ -10,9 +10,9 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    static: path.resolve(__dirname, '../dist'), // Serve content from 'dist'
+    static: path.resolve(__dirname, '../dist'),
     hot: true,
-    port: 3000, // Optional: Specify a port if needed
+    port: 3000,
   },
   module: {
     rules: [
@@ -47,7 +47,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../src/index.html'), // Update template path
+      template: path.resolve(__dirname, '../dist/index.html'),
     }),
   ],
 };
