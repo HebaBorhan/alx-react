@@ -1,0 +1,74 @@
+.App {
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: rgb(231, 79, 79);
+  border-bottom: 5px solid rgb(231, 79, 79);
+}
+
+.App-body {
+  padding-top: 40px;
+  font-size: 20px;
+  min-height: 65vh;
+  font-family: 'Times New Roman', Times, serif;
+  border-bottom: 5px solid rgb(231, 79, 79);
+}
+
+.App-footer {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.App-body p {
+  padding-left: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding-left: 30px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  font-size: 12px;
+  width: 200px;
+  height: 10px;
+  padding-top: 15px;
+  border: 0.5px solid grey;
+}
+
+button {
+  font-size: 14px;
+  margin-top: 5px;
+  background-color: white;
+  cursor: pointer;
+  height: 20px;
+  align-content: center;
+  border-radius: 5px;
+  border: 0.5px solid grey;
+  width: 40px;
+}
+
+button:hover {
+  background-color: rgb(200, 60, 60);
+}
