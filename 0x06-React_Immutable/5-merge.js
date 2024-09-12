@@ -12,9 +12,5 @@ export function mergeElements(page1, page2) {
   const map1 = Map(page1);
   const map2 = Map(page2);
 
-  // Merge Maps
-  const mergedMap = map1.mergeWith((oldValue, newValue) => newValue, map2);
-
-  // Convert merged Map values into an Immutable List
-  return List(mergedMap.values());
+  return map1.merge(map2);
 }
