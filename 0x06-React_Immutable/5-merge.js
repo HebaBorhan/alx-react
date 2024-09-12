@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { Map, List } from 'immutable';
 
 // Concatenate 2 arrays into an Immutable List
 export function concatElements(page1, page2) {
