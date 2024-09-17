@@ -8,25 +8,19 @@ describe('App', () => {
   });
 
   it('does not display CourseList when isLoggedIn is false', () => {
-    render(<App />);
+    render(<App isLoggedIn={false} />);
     expect(screen.queryByText(/Available courses/i)).toBeNull();
   });
 
   it('displays CourseList and hides Login when isLoggedIn is true', () => {
-    // Render App with isLoggedIn set to true
-    jest.spyOn(React, 'useState').mockImplementationOnce(() => [true, jest.fn()]);
-    render(<App />);
-
-    // Check CourseList is displayed
+    render(<App isLoggedIn={true} />);
     expect(screen.getByText(/Available courses/i)).toBeInTheDocument();
-
-    // Check Login is not displayed
     expect(screen.queryByLabelText(/email/i)).toBeNull();
     expect(screen.queryByLabelText(/password/i)).toBeNull();
   });
 
   it('contains the Notifications component', () => {
-    render(<App />);
+    render(<App displayDrawer={true} />);
     expect(screen.getByText(/Here is the list of notifications/i)).toBeInTheDocument();
   });
 
@@ -35,8 +29,8 @@ describe('App', () => {
     expect(screen.getByText(/School dashboard/i)).toBeInTheDocument();
   });
 
-  it('contains the Login component', () => {
-    render(<App />);
+  it('contains the Login component when isLoggedIn is false', () => {
+    render(<App isLoggedIn={false} />);
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
   });

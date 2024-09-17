@@ -5,11 +5,14 @@ import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
 import PropTypes from 'prop-types';
 
-function Notifications({ displayDrawer }) {
+const Notifications = ({ displayDrawer = false }) => {
+  console.log('displayDrawer:', displayDrawer);
   return (
-    <div>
-      <div className="menuItem">Your notifications</div>
-      {displayDrawer && (
+    <>
+      <div className="menuItem">
+        <p>Your notifications</p>
+      </div>
+      {displayDrawer && 
         <div className="Notifications">
           <p>Here is the list of notifications</p>
           <ul>
@@ -35,17 +38,13 @@ function Notifications({ displayDrawer }) {
             />
           </button>
         </div>
-      )}
-    </div>
+      }
+    </>
   );
-}
-
-Notifications.propTypes = {
-  displayDrawer: PropTypes.bool,
 };
 
-Notifications.defaultProps = {
-  displayDrawer: false,
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool
 };
 
 export default Notifications;
