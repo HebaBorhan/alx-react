@@ -22,11 +22,8 @@ const listNotifications = [
   { id: 3, type: "urgent", html: { __html: getLatestNotification() } },
 ];
 
-const cssVars = {
-  mainColor: "#e01d3f",
-};
-
 const styles = StyleSheet.create({
+  // Existing styles...
   "App": {
     margin: 0,
     padding: 0,
@@ -59,14 +56,27 @@ const styles = StyleSheet.create({
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      displayDrawer: false, // Initialize state
+    };
     this.handleKeydown = this.handleKeydown.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
-  handleKeydown = (event) => {
+  handleKeydown(event) {
     if (event.key === "h" && event.ctrlKey) {
       alert("Logging you out");
       this.props.logOut();
     }
+  }
+
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
   }
 
   componentDidMount() {
@@ -81,7 +91,12 @@ class App extends Component {
     return (
       <>
         <div className={css(styles.App)}>
-          <Notifications listNotifications={listNotifications} />
+          <Notifications
+            displayDrawer={this.state.displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+            listNotifications={listNotifications}
+          />
           <div className={css(styles.AppHeader)}>
             <Header />
           </div>
