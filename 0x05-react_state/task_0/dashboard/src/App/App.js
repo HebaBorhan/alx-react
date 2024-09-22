@@ -88,11 +88,13 @@ class App extends Component {
   }
 
   render() {
+    const { displayDrawer } = this.state;  // Explicitly accessing displayDrawer from state
+
     return (
       <>
         <div className={css(styles.App)}>
           <Notifications
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={displayDrawer} // Pass state to Notifications
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
             listNotifications={listNotifications}
