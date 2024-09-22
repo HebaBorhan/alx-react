@@ -1,21 +1,35 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
 
 describe('<Notifications />', () => {
-  // Existing tests...
-
-  it('handleDisplayDrawer is called when menu item is clicked', () => {
+  it('calls handleDisplayDrawer when menu item is clicked', () => {
     const handleDisplayDrawer = jest.fn();
-    const wrapper = shallow(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
-    wrapper.find('.menuItem').simulate('click');
+    const { getByText } = render(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
+    
+    const menuItem = getByText('Your notifications'); // Adjust based on your actual menu item text
+    fireEvent.click(menuItem);
+    
     expect(handleDisplayDrawer).toHaveBeenCalled();
   });
 
-  it('handleHideDrawer is called when close button is clicked', () => {
+  it('calls handleHideDrawer when close button is clicked', () => {
     const handleHideDrawer = jest.fn();
-    const wrapper = shallow(<Notifications displayDrawer={true} handleHideDrawer={handleHideDrawer} />);
-    wrapper.find('button').simulate('click');
+    const { getByText } = render(<Notifications displayDrawer={true} handleHideDrawer={handleHideDrawer} />);
+    
+    const closeButton = getByText('Close'); // Adjust based on your actual close button text
+    fireEvent.click(closeButton);
+    
     expect(handleHideDrawer).toHaveBeenCalled();
+  });
+
+  it('renders the notifications when displayDrawer is true', () => {
+    const { getByText } = render(<Notifications displayDrawer={true} />);
+    expect(getByText('Here is the list of notifications')).toBeInTheDocument(); // Adjust based on your actual content
+  });
+
+  it('does not render the notifications when displayDrawer is false', () => {
+    const { queryByText } = render(<Notifications displayDrawer={false} />);
+    expect(queryByText('Here is the list of notifications')).not.toBeInTheDocument(); // Adjust based on your actual content
   });
 });
