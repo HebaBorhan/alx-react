@@ -1,4 +1,3 @@
-// Import notifications data
 import * as notificationsData from '../notifications.json';
 
 /**
