@@ -1,4 +1,4 @@
-import * as notificationsData from '../notifications.json';
+import * as notificationsData from '../../notifications.json';
 
 /**
  * Get all notifications by specific userId
