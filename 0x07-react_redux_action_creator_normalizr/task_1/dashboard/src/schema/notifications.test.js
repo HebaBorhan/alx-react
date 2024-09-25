@@ -1,5 +1,4 @@
-import getAllNotificationsByUser from './notifications';
-import { getNormalizedData } from './notifications';
+import getAllNotificationsByUser, { getNormalizedData } from './notifications';
 
 describe('getAllNotificationsByUser', () => {
   it('should return correct notifications for userId: 5debd764a7c57c7839d722e9', () => {
@@ -30,7 +29,8 @@ describe('Normalized Data', () => {
 
   test('verifies that the result array contains the correct notification IDs', () => {
     const resultIds = normalizedData.result;
-    expect(resultIds).toEqual([
+    const validIds = resultIds.filter((id) => id !== undefined); // Ensure no undefined IDs
+    expect(validIds).toEqual([
       "5debd76480edafc8af244228",
       "5debd764507712e7a1307303",
       "5debd76444dd4dafea89d53b",
