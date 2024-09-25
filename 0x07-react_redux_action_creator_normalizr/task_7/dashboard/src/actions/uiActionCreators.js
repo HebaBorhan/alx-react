@@ -1,5 +1,12 @@
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from './uiActionTypes';
-import { bindActionCreators } from 'redux';
+import {
+  LOGIN,
+  LOGOUT,
+  DISPLAY_NOTIFICATION_DRAWER,
+  HIDE_NOTIFICATION_DRAWER,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from './uiActionTypes';
+import fetch from 'node-fetch';
 
 export const login = (email, password) => ({
   type: LOGIN,
@@ -18,9 +25,25 @@ export const hideNotificationDrawer = () => ({
   type: HIDE_NOTIFICATION_DRAWER,
 });
 
-// Binding action creators
-export const bindUIActions = (dispatch) =>
-  bindActionCreators(
-    { login, logout, displayNotificationDrawer, hideNotificationDrawer },
-    dispatch
-  );
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS,
+});
+
+export const loginFailure = () => ({
+  type: LOGIN_FAILURE,
+});
+
+export const loginRequest = (email, password) => {
+  return async (dispatch) => {
+    dispatch(login(email, password));
+
+    try {
+      const response = await fetch('/login-success.json');
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      dispatch(loginSuccess());
+    } catch (error) {
+      dispatch(loginFailure());
+    }
+  };
+};

@@ -1,40 +1,46 @@
-import { login, logout, displayNotificationDrawer, hideNotificationDrawer } from './uiActionCreators';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import fetchMock from 'fetch-mock';
 import {
   LOGIN,
-  LOGOUT,
-  DISPLAY_NOTIFICATION_DRAWER,
-  HIDE_NOTIFICATION_DRAWER
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
 } from './uiActionTypes';
+import { loginRequest } from './uiActionCreators';
 
-describe('UI Action Creators', () => {
-  it('should create an action to login', () => {
-    const email = 'user@example.com';
-    const password = 'password123';
-    const expectedAction = {
-      type: LOGIN,
-      user: { email, password }
-    };
-    expect(login(email, password)).toEqual(expectedAction);
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
+describe('loginRequest action creator', () => {
+  afterEach(() => {
+    fetchMock.restore();
   });
 
-  it('should create an action to logout', () => {
-    const expectedAction = {
-      type: LOGOUT
-    };
-    expect(logout()).toEqual(expectedAction);
+  it('should dispatch LOGIN and LOGIN_SUCCESS on successful login', () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: LOGIN, user: { email: 'test@example.com', password: 'password' } },
+      { type: LOGIN_SUCCESS },
+    ];
+
+    fetchMock.mock('/login-success.json', 200);
+
+    return store.dispatch(loginRequest('test@example.com', 'password')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
-  it('should create an action to display the notification drawer', () => {
-    const expectedAction = {
-      type: DISPLAY_NOTIFICATION_DRAWER
-    };
-    expect(displayNotificationDrawer()).toEqual(expectedAction);
-  });
+  it('should dispatch LOGIN and LOGIN_FAILURE on failed login', () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: LOGIN, user: { email: 'test@example.com', password: 'password' } },
+      { type: LOGIN_FAILURE },
+    ];
 
-  it('should create an action to hide the notification drawer', () => {
-    const expectedAction = {
-      type: HIDE_NOTIFICATION_DRAWER
-    };
-    expect(hideNotificationDrawer()).toEqual(expectedAction);
+    fetchMock.mock('/login-success.json', 500);
+
+    return store.dispatch(loginRequest('test@example.com', 'password')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });
