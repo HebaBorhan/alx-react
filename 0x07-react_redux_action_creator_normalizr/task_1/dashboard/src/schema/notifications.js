@@ -12,9 +12,9 @@ const normalizedData = normalize(notificationsData, [notification]);
 export const getNormalizedData = () => normalizedData;
 
 export default function getAllNotificationsByUser(userId) {
-  const { notifications } = normalizedData.entities;
-
-  return Object.keys(notifications)
-    .filter((id) => notifications[id].author === userId)
-    .map((id) => notifications[id].context);
-}
+    const { notifications, messages } = normalizedData.entities;
+  
+    return Object.keys(notifications)
+      .filter((id) => notifications[id].author === userId)
+      .map((id) => messages[notifications[id].context]);  // Return full message object
+  }
