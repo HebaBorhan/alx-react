@@ -1,35 +1,25 @@
 import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from '../actions/courseActionTypes';
+import { coursesNormalizer } from '../schema/courses';
+import { Map } from 'immutable';
 
-// Initial state for the course reducer is an empty array
-export const initialState = [];
+const initialState = Map({
+  courses: Map(),
+});
 
-// Reducer function to handle course actions
+// Reducer function
 export default function courseReducer(state = initialState, action = {}) {
-    switch (action.type) {
-        case FETCH_COURSE_SUCCESS:
-            // When fetching courses, ensure each course has isSelected set to false
-            return action.data.map(course => ({
-                ...course,
-                isSelected: false,
-            }));
+  switch (action.type) {
+    case FETCH_COURSE_SUCCESS:
+      const normalizedData = coursesNormalizer(action.data);
+      return state.mergeIn(['courses'], normalizedData.entities.courses);
 
-        case SELECT_COURSE:
-            // Set isSelected to true for the course with the matching id
-            return state.map(course =>
-                course.id === action.index
-                    ? { ...course, isSelected: true }
-                    : course
-            );
+    case SELECT_COURSE:
+      return state.setIn(['courses', String(action.index), 'isSelected'], true);
 
-        case UNSELECT_COURSE:
-            // Set isSelected to false for the course with the matching id
-            return state.map(course =>
-                course.id === action.index
-                    ? { ...course, isSelected: false }
-                    : course
-            );
+    case UNSELECT_COURSE:
+      return state.setIn(['courses', String(action.index), 'isSelected'], false);
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
