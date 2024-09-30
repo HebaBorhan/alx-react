@@ -1,43 +1,27 @@
-import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER, NotificationTypeFilters } from '../actions/notificationActionTypes';
+import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER } from '../actions/notificationActionTypes';
+import { notificationsNormalizer } from '../schema/notifications';
+import { Map } from 'immutable';
+import { NotificationTypeFilters } from '../actions/notificationActionTypes';
 
-// Initial state for notifications reducer
-export const initialState = {
-    notifications: [],
-    filter: NotificationTypeFilters.DEFAULT,
-};
+const initialState = Map({
+  notifications: Map(),
+  filter: NotificationTypeFilters.DEFAULT,
+});
 
 // Reducer function
 export default function notificationReducer(state = initialState, action = {}) {
-    switch (action.type) {
-        case FETCH_NOTIFICATIONS_SUCCESS:
-            // Add isRead: false to each notification
-            return {
-                ...state,
-                notifications: action.data.map(notification => ({
-                    ...notification,
-                    isRead: false,
-                })),
-            };
+  switch (action.type) {
+    case FETCH_NOTIFICATIONS_SUCCESS:
+      const normalizedData = notificationsNormalizer(action.data);
+      return state.mergeIn(['notifications'], normalizedData.entities.notifications);
 
-        case MARK_AS_READ:
-            // Update the specified notification's isRead attribute to true
-            return {
-                ...state,
-                notifications: state.notifications.map(notification =>
-                    notification.id === action.index
-                        ? { ...notification, isRead: true }
-                        : notification
-                ),
-            };
+    case MARK_AS_READ:
+      return state.setIn(['notifications', String(action.index), 'isRead'], true);
 
-        case SET_TYPE_FILTER:
-            // Update the filter
-            return {
-                ...state,
-                filter: action.filter,
-            };
+    case SET_TYPE_FILTER:
+      return state.set('filter', action.filter);
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
